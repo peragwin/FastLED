@@ -82,6 +82,7 @@ enum ESPIChipsets {
 
 enum ESM { SMART_MATRIX };
 enum OWS2811 { OCTOWS2811,OCTOWS2811_400, OCTOWS2813};
+enum TWS2811 { TRIDUOWS2811 };
 enum SWS2812 { WS2812SERIAL };
 
 #ifdef HAS_PIXIE
@@ -384,6 +385,21 @@ public:
 		return addLeds<CHIPSET,GRB>(data,nLedsOrOffset,nLedsIfOffset);
 	}
 
+#endif
+
+#ifdef USE_TDWS2811
+	template<TWS2811 CHIPSET, size_t MAX_LEDS, EOrder RGB_ORDER>
+	static CLEDController &addLeds(struct CRGB *data, /*TDWS2811<MAX_LEDS> *tdws,*/ int nLedsOrOffset, int nLedsIfOffset = 0)
+	{
+		static CTriantaduoWS2811Controller<RGB_ORDER, MAX_LEDS> controller;
+		return addLeds(&controller, data, nLedsOrOffset, nLedsIfOffset);
+	}
+
+	template<TWS2811 CHIPSET, size_t MAX_LEDS>
+	static CLEDController &addLeds(struct CRGB *data, /*TDWS2811<MAX_LEDS> *tdws,*/ int nLedsOrOffset, int nLedsIfOffset = 0)
+	{
+		return addLeds<CHIPSET,MAX_LEDS,GRB>(data,nLedsOrOffset,nLedsIfOffset);
+	}
 #endif
 
 #ifdef USE_WS2812SERIAL
