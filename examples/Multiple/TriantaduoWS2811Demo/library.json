@@ -1,0 +1,16 @@
+{
+    "name": "TriantaduoWS2811Demo",
+    "version": "0.1.0",
+    "frameworks": "arduino",
+    "platforms": "teensy",
+    "build": {
+        "srcFilter": [
+            "+<*.c>",
+            "+<*.cpp>",
+            "+<*.h>"
+        ],
+        "includeDir": ["TriantaduoWS2811"],
+        "srcDir": [".","TriantaduoWS2811"],
+        "libArchive": false
+    }
+}
